@@ -7,7 +7,7 @@ export function SignUpPage() {
         signInUrl="/sign-in"
         fallbackRedirectUrl="/chat"
         forceRedirectUrl="/chat"
-        appearance={{ baseTheme: undefined, variables: { colorBackground: '#0a0a0a', colorText: '#e5e5e5' } }}
+       
       />
     </div>
   )
