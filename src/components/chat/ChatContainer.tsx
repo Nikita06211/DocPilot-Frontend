@@ -22,9 +22,9 @@ export function ChatContainer({
   error,
 }: ChatContainerProps) {
   return (
-    <div className="flex flex-1 flex-col overflow-hidden">
-      <main className="flex flex-1 flex-col overflow-hidden">
-        <div className="mx-auto w-full max-w-3xl flex-1 overflow-hidden px-4 py-6">
+    <div className="flex min-h-0 flex-1 flex-col">
+      <main className="min-h-0 flex-1 overflow-y-auto">
+        <div className="mx-auto w-full max-w-4xl px-4 py-6">
           {messages.length === 0 && !error && (
             <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
               <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground">

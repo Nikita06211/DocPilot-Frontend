@@ -11,7 +11,15 @@ import {
   ReasoningContent,
   ReasoningTrigger,
 } from '@/components/ui/reasoning'
-import { Tool } from '@/components/ui/tool'
+
+const TOOL_STATUS_LABELS: Record<string, string> = {
+  web_search: 'searching web',
+  scrape_docs: 'scraping docs',
+}
+
+function getToolStatusLabel(toolName: string): string {
+  return TOOL_STATUS_LABELS[toolName] ?? toolName.replace(/_/g, ' ')
+}
 
 interface MessageBubbleProps {
   message: UIMessage
@@ -72,7 +80,7 @@ const markdownComponents = {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-primary hover:underline"
+      className="text-primary underline"
       {...props}
     >
       {children}
@@ -150,36 +158,18 @@ export function MessageBubble({
             {parts.map((part, idx) => {
               if (isToolUIPart(part)) {
                 const toolName = getToolName(part)
-                const toolState =
+                const label = getToolStatusLabel(toolName)
+                const isComplete =
+                  part.state === 'output-available' ||
                   part.state === 'approval-requested' ||
                   part.state === 'approval-responded'
-                    ? 'input-available'
-                    : part.state === 'output-denied'
-                      ? 'output-error'
-                      : part.state
-                const inputRecord =
-                  part.input != null && typeof part.input === 'object' && !Array.isArray(part.input)
-                    ? (part.input as Record<string, unknown>)
-                    : { input: part.input }
-                const outputRecord =
-                  part.output != null && typeof part.output === 'object' && !Array.isArray(part.output)
-                    ? (part.output as Record<string, unknown>)
-                    : part.output != null
-                      ? { result: part.output }
-                      : undefined
                 return (
-                  <Tool
+                  <span
                     key={part.toolCallId ?? `tool-${idx}`}
-                    toolPart={{
-                      type: toolName,
-                      state: toolState,
-                      input: inputRecord,
-                      output: outputRecord,
-                      toolCallId: part.toolCallId,
-                      errorText: part.errorText,
-                    }}
-                    className="mt-2"
-                  />
+                    className="text-muted-foreground inline-block text-xs"
+                  >
+                    {isComplete ? label : `${label}...`}
+                  </span>
                 )
               }
               if (isReasoningUIPart(part)) {

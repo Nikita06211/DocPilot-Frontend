@@ -16,10 +16,10 @@ export function ChatInput({
   isLoading,
 }: ChatInputProps) {
   return (
-    <div className="border-t border-white/8 bg-background px-4 py-4">
+    <div className="shrink-0 border-t border-white/8 bg-background px-4 py-4">
       <form
         onSubmit={handleSubmit}
-        className="mx-auto flex max-w-3xl gap-2"
+        className="mx-auto flex max-w-4xl gap-2"
       >
         <Input
           value={input}
@@ -39,7 +39,7 @@ export function ChatInput({
           <Send className="size-4" aria-hidden />
         </Button>
       </form>
-      <p className="mx-auto mt-2 max-w-3xl text-center text-xs text-muted-foreground">
+      <p className="mx-auto mt-2 max-w-4xl text-center text-xs text-muted-foreground">
         Powered by web search — always up to date
       </p>
     </div>

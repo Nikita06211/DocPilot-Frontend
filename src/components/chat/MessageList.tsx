@@ -1,5 +1,4 @@
 import type { UIMessage } from 'ai'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { MessageBubble } from './MessageBubble'
 
 interface MessageListProps {
@@ -16,8 +15,7 @@ export function MessageList({
   error,
 }: MessageListProps) {
   return (
-    <ScrollArea className="h-full pr-4">
-      <div className="flex flex-col gap-6 pb-4">
+    <div className="flex flex-col gap-6 pb-4">
         {messages.map((message) => (
           <MessageBubble
             key={message.id}
@@ -46,6 +44,5 @@ export function MessageList({
           </div>
         )}
       </div>
-    </ScrollArea>
   )
 }
